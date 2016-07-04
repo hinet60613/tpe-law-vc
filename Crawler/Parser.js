@@ -48,15 +48,7 @@ var ArticleParser = function(charString) {
 	return objArticle;
 }
 
-/*** Unit Testing Code ***/ /*
-console.log(chCharToInt('一'));
-console.log(chCharToInt('五'));
-console.log(chCharToInt('十'));
-console.log(chCharToInt('十五'));
-console.log(chCharToInt('一十五'));
-console.log(chCharToInt('一百零五'));
-console.log(chCharToInt('一百一十五'));
-console.log(chCharToInt('一千零五'));
-console.log(chCharToInt('一千零五十'));
-console.log(ArticleParser("第  七  條    市政府設臺北自來水事業處，其組織自治條例另定之。"));
-*/
+module.exports = {
+	chCharToInt: chCharToInt,
+	ArticleParser: ArticleParser
+};

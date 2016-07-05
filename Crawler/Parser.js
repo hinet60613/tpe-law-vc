@@ -38,13 +38,22 @@ function chCharToInt(charString) {
 }
 
 var ArticleParser = function(charString) {
+	charString = JSON.stringify(charString);
 	var objArticle = {};
+	var charStringWithoutSpace = charString.replace(/\s/g, '').replace(/\"/g, '');
+
 	var ptnArticleNumber = new RegExp("第[\u4e00-\u9fa5]*條");
-	var charStringWithoutSpace = charString.replace(/\s/g, '');
 	var numberString = charStringWithoutSpace.match(ptnArticleNumber);
-	var articleString = charStringWithoutSpace.replace(numberString[0], '');
+
+	var articles = charStringWithoutSpace.replace(numberString[0], '').split('。\\r\\n');
+	
+	articles.forEach(function(article, idx) {
+		article = article.replace('\\r\\n', '');
+		if(idx < articles.length-1) article += '。';
+		articles[idx] = article;
+	});
 	objArticle['no'] = chCharToInt(numberString[0]);
-	objArticle['article'] = articleString;
+	objArticle['article'] = articles;
 	return objArticle;
 }
 
